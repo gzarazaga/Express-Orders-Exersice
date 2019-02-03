@@ -15,7 +15,8 @@ public class OpinionService {
         this.opinionRepository = opinionRepository;
     }
 
-    public void addOpinion(Opinion opinion) {
-        opinionRepository.save(opinion);
+    public Opinion addOpinion(Opinion opinion) {
+        Opinion savedOpinion = opinionRepository.save(opinion);
+        return savedOpinion;
     }
 }

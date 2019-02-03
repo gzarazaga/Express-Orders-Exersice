@@ -1,36 +1,26 @@
-package com.pedidosya.ejercicio.domain;
+package com.pedidosya.ejercicio.controller;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
 import java.util.Date;
 
-@Entity
-public class Opinion {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+public class OpinionRequest {
     private String descripcion;
     private Integer puntuacion;
     private Date fechaDeCreacion;
     private Long  compraId;
     private Long usuarioId;
     private Long tiendaId;
-    private Boolean opinionEliminada;
 
-    public Opinion() {
-
+    public OpinionRequest() {
     }
 
-    public Opinion(String descripcion, Integer puntuacion, Date fechaDeCreacion, Long compraId, Long usuarioId, Long tiendaId, Boolean opinionEliminada) {
+    public OpinionRequest(String descripcion, Integer puntuacion, Date fechaDeCreacion, Long compraId, Long usuarioId, Long tiendaId) {
         this.descripcion = descripcion;
         this.puntuacion = puntuacion;
         this.fechaDeCreacion = fechaDeCreacion;
-        this.setCompraId(compraId);
-        this.setUsuarioId(usuarioId);
-        this.setTiendaId(tiendaId);
-        this.opinionEliminada = opinionEliminada;
+        this.compraId = compraId;
+        this.usuarioId = usuarioId;
+        this.tiendaId = tiendaId;
     }
 
     public String getDescripcion() {
@@ -55,14 +45,6 @@ public class Opinion {
 
     public void setFechaDeCreacion(Date fechaDeCreacion) {
         this.fechaDeCreacion = fechaDeCreacion;
-    }
-
-    public Boolean getOpinionEliminada() {
-        return opinionEliminada;
-    }
-
-    public void setOpinionEliminada(Boolean opinionEliminada) {
-        this.opinionEliminada = opinionEliminada;
     }
 
     public Long getCompraId() {
@@ -91,22 +73,13 @@ public class Opinion {
 
     @Override
     public String toString() {
-        return "Opinion{" +
+        return "OpinionRequest{" +
                 "descripcion='" + descripcion + '\'' +
                 ", puntuacion=" + puntuacion +
                 ", fechaDeCreacion=" + fechaDeCreacion +
-                ", compraId=" + getCompraId() +
-                ", usuarioId=" + getUsuarioId() +
-                ", tiendaId=" + getTiendaId() +
-                ", opinionEliminada=" + opinionEliminada +
+                ", compraId=" + compraId +
+                ", usuarioId=" + usuarioId +
+                ", tiendaId=" + tiendaId +
                 '}';
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

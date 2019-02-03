@@ -1,36 +1,27 @@
-package com.pedidosya.ejercicio.domain;
+package com.pedidosya.ejercicio.controller;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import java.util.Date;
 
-@Entity
-public class Opinion {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Long id;
+public class OpinionResponse {
+    private Long opinionId;
     private String descripcion;
     private Integer puntuacion;
     private Date fechaDeCreacion;
     private Long  compraId;
     private Long usuarioId;
     private Long tiendaId;
-    private Boolean opinionEliminada;
 
-    public Opinion() {
-
+    public OpinionResponse() {
     }
 
-    public Opinion(String descripcion, Integer puntuacion, Date fechaDeCreacion, Long compraId, Long usuarioId, Long tiendaId, Boolean opinionEliminada) {
+    public OpinionResponse(Long opinionId, String descripcion, Integer puntuacion, Date fechaDeCreacion, Long compraId, Long usuarioId, Long tiendaId) {
+        this.opinionId = opinionId;
         this.descripcion = descripcion;
         this.puntuacion = puntuacion;
         this.fechaDeCreacion = fechaDeCreacion;
-        this.setCompraId(compraId);
-        this.setUsuarioId(usuarioId);
-        this.setTiendaId(tiendaId);
-        this.opinionEliminada = opinionEliminada;
+        this.compraId = compraId;
+        this.usuarioId = usuarioId;
+        this.tiendaId = tiendaId;
     }
 
     public String getDescripcion() {
@@ -57,14 +48,6 @@ public class Opinion {
         this.fechaDeCreacion = fechaDeCreacion;
     }
 
-    public Boolean getOpinionEliminada() {
-        return opinionEliminada;
-    }
-
-    public void setOpinionEliminada(Boolean opinionEliminada) {
-        this.opinionEliminada = opinionEliminada;
-    }
-
     public Long getCompraId() {
         return compraId;
     }
@@ -89,24 +72,24 @@ public class Opinion {
         this.tiendaId = tiendaId;
     }
 
+    public Long getOpinionId() {
+        return opinionId;
+    }
+
+    public void setOpinionId(Long opinionId) {
+        this.opinionId = opinionId;
+    }
+
     @Override
     public String toString() {
-        return "Opinion{" +
+        return "OpinionResponse{" +
+                "opinionId='" + opinionId + '\'' +
                 "descripcion='" + descripcion + '\'' +
                 ", puntuacion=" + puntuacion +
                 ", fechaDeCreacion=" + fechaDeCreacion +
-                ", compraId=" + getCompraId() +
-                ", usuarioId=" + getUsuarioId() +
-                ", tiendaId=" + getTiendaId() +
-                ", opinionEliminada=" + opinionEliminada +
+                ", compraId=" + compraId +
+                ", usuarioId=" + usuarioId +
+                ", tiendaId=" + tiendaId +
                 '}';
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }
