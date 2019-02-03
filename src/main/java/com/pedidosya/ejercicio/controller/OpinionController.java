@@ -5,10 +5,7 @@ import com.pedidosya.ejercicio.services.OpinionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -32,6 +29,16 @@ public class OpinionController {
         OpinionResponse opinionResponse = convert(savedOpinion);
 
         return new ResponseEntity(opinionResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/opinion/{id}")
+    public ResponseEntity deleteOpinion(@PathVariable Long id) {
+        if (id == null) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        opinionService.deleteOpinion(id);
+
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     private OpinionResponse convert(Opinion savedOpinion) {

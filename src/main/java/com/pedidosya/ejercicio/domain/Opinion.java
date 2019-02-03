@@ -33,6 +33,10 @@ public class Opinion {
         this.opinionEliminada = opinionEliminada;
     }
 
+    public Opinion(Long opinionId) {
+        this.id = opinionId;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }

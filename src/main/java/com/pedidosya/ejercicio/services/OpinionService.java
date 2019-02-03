@@ -19,4 +19,9 @@ public class OpinionService {
         Opinion savedOpinion = opinionRepository.save(opinion);
         return savedOpinion;
     }
+
+    public void deleteOpinion(Long opinionId) {
+        Opinion opinion = new Opinion(opinionId);
+        opinionRepository.delete(opinion);
+    }
 }

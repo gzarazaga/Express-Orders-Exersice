@@ -25,4 +25,10 @@ public class OpinionServiceTest {
         Opinion savedOpinion = opinionService.addOpinion(opinion);
         assertNotNull(savedOpinion);
     }
+
+    @Test
+    public void deleteOpinionTest() {
+        opinionService.deleteOpinion(1L);
+
+    }
 }
