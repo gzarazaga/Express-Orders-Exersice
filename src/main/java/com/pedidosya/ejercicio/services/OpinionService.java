@@ -24,13 +24,13 @@ public class OpinionService {
         return savedOpinion;
     }
 
-    public void deleteOpinion(Long opinionId) {
+    public Opinion deleteOpinion(Long opinionId) {
         Opinion opinion = opinionRepository.getById(opinionId);
         if (opinion.getOpinionEliminada()) {
             throw new OpinionNotFoundException(String.format("Opinion no encontrada %s", opinionId));
         }
         opinion.setOpinionEliminada(true);
-        opinionRepository.save(opinion);
+        return opinionRepository.save(opinion);
     }
 
     public Opinion getOpinionByCompraId(Long compraId) {
