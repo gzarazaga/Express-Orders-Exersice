@@ -2,6 +2,8 @@ package com.pedidosya.ejercicio.controller;
 
 import com.pedidosya.ejercicio.domain.Opinion;
 import com.pedidosya.ejercicio.services.OpinionService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/pedidosya")
+@Api(value="Opinion", description="Opinion API")
 public class OpinionController {
 
     private OpinionService opinionService;
@@ -24,6 +27,7 @@ public class OpinionController {
     }
 
     @PostMapping("/opinion")
+    @ApiOperation(value = "Agregar una opinion", response = OpinionResponse.class)
     public ResponseEntity<OpinionResponse> addOpinion(@RequestBody @Valid OpinionRequest opinionRequest) {
         Opinion opinion = convert(opinionRequest);
 
@@ -34,7 +38,8 @@ public class OpinionController {
         return new ResponseEntity(opinionResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping("/opinion/{id}")
+    @PutMapping("/opinion/{id}")
+    @ApiOperation(value = "Borrar una opinion", response = OpinionResponse.class)
     public ResponseEntity deleteOpinion(@PathVariable Long id) {
         if (id == null) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -45,6 +50,7 @@ public class OpinionController {
     }
 
     @GetMapping("/opinion/compra/{id}")
+    @ApiOperation(value = "Obtener una opinion para una compra", response = OpinionResponse.class)
     public ResponseEntity getOpinionByCompra(@PathVariable Long id) {
         if (id == null) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -56,6 +62,7 @@ public class OpinionController {
     }
 
     @GetMapping("/opinion/tienda/{id}")
+    @ApiOperation(value = "Obtener opiniones de una tienda en un rango de fechas", response = Iterable.class)
     public ResponseEntity getOpinionByTiendaAndDateRange(@PathVariable Long id, @RequestBody QueryRequest queryRequest) {
         if (id == null || queryRequest  == null || queryRequest.getFechaDesde()  == null || queryRequest.getFechaHasta() == null ) {
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
