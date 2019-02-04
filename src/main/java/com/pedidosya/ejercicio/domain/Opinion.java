@@ -1,9 +1,6 @@
 package com.pedidosya.ejercicio.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -14,6 +11,7 @@ public class Opinion {
     private String descripcion;
     private Integer puntuacion;
     private Date fechaDeCreacion;
+    @Column(unique=true)
     private Long  compraId;
     private Long usuarioId;
     private Long tiendaId;

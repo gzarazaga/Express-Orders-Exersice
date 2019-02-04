@@ -8,6 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/pedidosya")
@@ -39,6 +42,37 @@ public class OpinionController {
         opinionService.deleteOpinion(id);
 
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/opinion/compra/{id}")
+    public ResponseEntity getOpinionByCompra(@PathVariable Long id) {
+        if (id == null) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        Opinion opinion = opinionService.getOpinionByCompraId(id);
+        OpinionResponse opinionResponse = convert(opinion);
+
+        return new ResponseEntity(opinionResponse, HttpStatus.OK);
+    }
+
+    @GetMapping("/opinion/tienda/{id}")
+    public ResponseEntity getOpinionByTiendaAndDateRange(@PathVariable Long id, @RequestBody QueryRequest queryRequest) {
+        if (id == null || queryRequest  == null || queryRequest.getFechaDesde()  == null || queryRequest.getFechaHasta() == null ) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+        List<Opinion> opinions = opinionService.getOpinionByTiendaIdAndDateRange(id, queryRequest.getFechaDesde(), queryRequest.getFechaHasta());
+        List<OpinionResponse> opinionResponses = convert(opinions);
+
+        return new ResponseEntity(opinionResponses, HttpStatus.OK);
+    }
+
+    private List<OpinionResponse> convert(List<Opinion> opinions) {
+        List<OpinionResponse> responses = new ArrayList<>();
+
+        for (Opinion opinion: opinions) {
+            responses.add(convert(opinion));
+        }
+        return  responses;
     }
 
     private OpinionResponse convert(Opinion savedOpinion) {

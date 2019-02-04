@@ -26,9 +26,4 @@ public class OpinionServiceTest {
         assertNotNull(savedOpinion);
     }
 
-    @Test
-    public void deleteOpinionTest() {
-        opinionService.deleteOpinion(1L);
-
-    }
 }
